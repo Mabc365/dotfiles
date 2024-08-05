@@ -30,6 +30,7 @@ Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 Set-Alias home cd
 Set-Alias cr clear
 Set-Alias sudo gsudo
+Set-Alias update '~/.config/powershell/update.ps1'
 
 # Utilities
 function which ($command) {
