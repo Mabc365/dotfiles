@@ -4,46 +4,71 @@ scoop update
 
 #Prompt Updates
 $canConnectToGitHub = Test-Connection github.com -Count 2 -Quiet -TimeoutSeconds 5
-function Update-Profile {
+
+function Update-Config {
+    param (
+        [string]$repoUrl = "https://github.com/Mabc365/dotfiles.git",
+        [string]$localConfigPath = "~/.config",
+        [string]$repoConfigPath = ".config"
+    )
+
     if (-not $canConnectToGitHub) {
-        Write-Host "Skipping profile update check. Unable to reach GitHub.com." -ForegroundColor Yellow
+        Write-Host "Skipping config update check. Unable to reach GitHub.com." -ForegroundColor Yellow
         return
     }
 
-    Write-Host "Checking for profile updates..." -ForegroundColor Cyan
+    Write-Host "Checking for config updates..." -ForegroundColor Cyan
 
     try {
-        $url = "https://raw.githubusercontent.com/Mabc365/dotfiles/main/.config/powershell/user_profile.ps1"
-        $localProfilePath = "~/.config/powershell/user_profile.ps1"
-        Write-Host "Local profile path: $localProfilePath" -ForegroundColor Gray
+        $tempRepoPath = "$env:temp\dotfiles"
+        if (Test-Path $tempRepoPath) {
+            Remove-Item -Recurse -Force $tempRepoPath
+        }
 
-        $oldhash = Get-FileHash $localProfilePath
-        Write-Host "Current local profile hash: $($oldhash.Hash)" -ForegroundColor Gray
+        Write-Host "Cloning repository to: $tempRepoPath" -ForegroundColor Gray
+        git clone $repoUrl $tempRepoPath
 
-        $tempFilePath = "$env:temp/user_profile.ps1"
-        Write-Host "Downloading latest profile to: $tempFilePath" -ForegroundColor Gray
-        Invoke-RestMethod $url -OutFile $tempFilePath
+        $repoConfigFullPath = Join-Path $tempRepoPath $repoConfigPath
+        if (-not (Test-Path $repoConfigFullPath)) {
+            Write-Error "Config folder not found in the repository: $repoConfigFullPath"
+            return
+        }
 
-        $newhash = Get-FileHash $tempFilePath
-        Write-Host "Downloaded profile hash: $($newhash.Hash)" -ForegroundColor Gray
+        $localConfigFullPath = (Resolve-Path $localConfigPath).Path
 
-        if ($newhash.Hash -ne $oldhash.Hash) {
-            Write-Host "Hashes differ. Updating profile..." -ForegroundColor Yellow
-            Copy-Item -Path $tempFilePath -Destination $localProfilePath -Force
-            Write-Host "Profile has been updated. Please restart your shell to reflect changes" -ForegroundColor Magenta
-        } else {
-            Write-Host "Hashes match. Profile is up to date." -ForegroundColor Green
+        $repoFiles = Get-ChildItem -Recurse -File $repoConfigFullPath
+        foreach ($repoFile in $repoFiles) {
+            $relativePath = $repoFile.FullName.Substring($repoConfigFullPath.Length)
+            $localFilePath = Join-Path $localConfigFullPath $relativePath
+
+            if (Test-Path $localFilePath) {
+                $localContent = Get-Content -Path $localFilePath -Raw
+                $repoContent = Get-Content -Path $repoFile.FullName -Raw
+
+                if ($localContent -ne $repoContent) {
+                    Write-Host "Contents differ for $relativePath. Updating file..." -ForegroundColor Yellow
+                    Remove-Item -Path $localFilePath -Force -ErrorAction SilentlyContinue
+                    Copy-Item -Path $repoFile.FullName -Destination $localFilePath -Force
+                    Write-Host "File $relativePath has been updated." -ForegroundColor Magenta
+                } else {
+                    Write-Host "Contents match for $relativePath. File is up to date." -ForegroundColor Green
+                }
+            } else {
+                Write-Host "Local file $relativePath does not exist. Creating file..." -ForegroundColor Yellow
+                Copy-Item -Path $repoFile.FullName -Destination $localFilePath -Force
+                Write-Host "File $relativePath has been created." -ForegroundColor Magenta
+            }
         }
     } catch {
-        Write-Error "Unable to check for profile updates: $_"
+        Write-Error "Unable to check for config updates: $_"
     } finally {
-        if (Test-Path $tempFilePath) {
-            Remove-Item $tempFilePath -ErrorAction SilentlyContinue
-            Write-Host "Temporary file removed." -ForegroundColor Gray
+        if (Test-Path $tempRepoPath) {
+            Remove-Item -Recurse -Force $tempRepoPath
+            Write-Host "Temporary repository removed." -ForegroundColor Gray
         }
     }
 }
 
-Write-Host "Starting profile update process..." -ForegroundColor Cyan
-Update-Profile
-Write-Host "Profile update process completed." -ForegroundColor Cyan
+Write-Host "Starting config update process..." -ForegroundColor Cyan
+Update-Config
+Write-Host "Config update process completed." -ForegroundColor Cyan
