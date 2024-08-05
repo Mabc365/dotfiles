@@ -8,6 +8,7 @@ winget install -e --id Git.Git
 winget install Neovim.Neovim
 winget install junegunn.fzf
 winget install gerardog.gsudo
+winget install JEsseDuffield.lazygit 
 
 #Setting Configuration
 Write-Output Copy-This And-Please-Insure-That-You-Put-The-Dollar-Sign-Immediately-Before-env: ". $ env:USERPROFILE\.config\powershell\user_profile.ps1"
