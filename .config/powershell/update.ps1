@@ -10,21 +10,40 @@ function Update-Profile {
         return
     }
 
+    Write-Host "Checking for profile updates..." -ForegroundColor Cyan
+
     try {
         $url = "https://raw.githubusercontent.com/Mabc365/dotfiles/main/.config/powershell/user_profile.ps1"
         $localProfilePath = "~/.config/powershell/user_profile.ps1"
+        Write-Host "Local profile path: $localProfilePath" -ForegroundColor Gray
+
         $oldhash = Get-FileHash $localProfilePath
+        Write-Host "Current local profile hash: $($oldhash.Hash)" -ForegroundColor Gray
+
         $tempFilePath = "$env:temp/user_profile.ps1"
+        Write-Host "Downloading latest profile to: $tempFilePath" -ForegroundColor Gray
         Invoke-RestMethod $url -OutFile $tempFilePath
+
         $newhash = Get-FileHash $tempFilePath
+        Write-Host "Downloaded profile hash: $($newhash.Hash)" -ForegroundColor Gray
+
         if ($newhash.Hash -ne $oldhash.Hash) {
+            Write-Host "Hashes differ. Updating profile..." -ForegroundColor Yellow
             Copy-Item -Path $tempFilePath -Destination $localProfilePath -Force
             Write-Host "Profile has been updated. Please restart your shell to reflect changes" -ForegroundColor Magenta
+        } else {
+            Write-Host "Hashes match. Profile is up to date." -ForegroundColor Green
         }
     } catch {
-        Write-Error "Unable to check for profile updates"
+        Write-Error "Unable to check for profile updates: $_"
     } finally {
-        Remove-Item $tempFilePath -ErrorAction SilentlyContinue
+        if (Test-Path $tempFilePath) {
+            Remove-Item $tempFilePath -ErrorAction SilentlyContinue
+            Write-Host "Temporary file removed." -ForegroundColor Gray
+        }
     }
 }
+
+Write-Host "Starting profile update process..." -ForegroundColor Cyan
 Update-Profile
+Write-Host "Profile update process completed." -ForegroundColor Cyan
