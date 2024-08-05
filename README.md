@@ -1,7 +1,6 @@
 # My Personal Dotfiles
 ### Installation Commands
 ```
-git clone https://github.com/Mabc365/dotfiles.git ~/
-cd .config
-./setup.ps1
+winget install --id gerardog.gsudo
+irm "https://raw.githubusercontent.com/Mabc365/dotfiles/main/setup.ps1" | iex
 ```
