@@ -31,6 +31,8 @@ Set-Alias home cd
 Set-Alias cr clear
 Set-Alias sudo gsudo
 Set-Alias update '~/.config/powershell/update.ps1'
+Set-Alias r pwsh
+Set-Alias e explorer
 
 # Utilities
 function which ($command) {
