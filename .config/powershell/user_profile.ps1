@@ -29,6 +29,8 @@ Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 Set-Alias home cd
 Set-Alias cr clear
+Set-Alias sudo gsudo
+
 # Utilities
 function which ($command) {
       Get-Command -Name $command -ErrorAction SilentlyContinue |
