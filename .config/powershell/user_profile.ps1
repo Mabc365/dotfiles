@@ -33,7 +33,6 @@ Set-Alias sudo gsudo
 Set-Alias update '~/.config/powershell/update.ps1'
 Set-Alias r pwsh
 Set-Alias e explorer
-Set-Alias x exit
 
 # Utilities
 function which ($command) {
