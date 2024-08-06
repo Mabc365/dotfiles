@@ -1,5 +1,5 @@
 #Cloning Repository
-git clone -b clone https://github.com/Mabc365/dotfiles.git $env:USERPROFILE\
+git clone -b clone https://github.com/Mabc365/dotfiles.git $env:USERPROFILE\.config
 
 # Installing Scoop
 iwr -useb get.scoop.sh | iex
