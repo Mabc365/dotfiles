@@ -72,7 +72,7 @@ winget install --id GitHub.cli
 
 # Setting Configuration
 Write-Output "Copy the following command and ensure that you put the dollar sign immediately before 'env':"
-Write-Output ". $env:USERPROFILE\.config\powershell\user_profile.ps1"
+Write-Output ". $ env:USERPROFILE\.config\powershell\user_profile.ps1"
 pause
 nvim $PROFILE.CurrentUserCurrentHost
 
