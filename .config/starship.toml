@@ -3,7 +3,7 @@
 add_newline = true
 continuation_prompt = "[▸▹ ](dimmed white)"
 
-format = """($nix_shell$container$fill$git_metrics\n)$cmd_duration\
+format = """($nix_shell$container$fill$directory$git_branch$time\n)$cmd_duration\
 $hostname\
 $localip\
 $shlvl\
@@ -169,8 +169,8 @@ style = "italic dimmed yellow"
 
 [git_branch]
 format = " [$branch(:$remote_branch)]($style)"
-symbol = "[△](bold italic bright-blue)"
-style = "italic bright-blue"
+symbol = "[△](bold italic bright-purple)"
+style = "italic bright-purple"
 truncation_symbol = "⋯"
 truncation_length = 11
 ignore_branches = ["main", "master"]
