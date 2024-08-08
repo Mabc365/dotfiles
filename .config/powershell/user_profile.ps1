@@ -37,6 +37,7 @@ Set-Alias r pwsh
 Set-Alias e explorer
 Set-Alias c cursor
 Set-Alias g git
+Set-Alias m 'git checkout clone -- ./.config/'
 
 # Utilities
 function which {
