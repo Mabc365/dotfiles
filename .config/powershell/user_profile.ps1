@@ -35,6 +35,8 @@ Set-Alias sudo gsudo
 Set-Alias update '~/.config/powershell/update.ps1'
 Set-Alias r pwsh
 Set-Alias e explorer
+Set-Alias c cursor
+Set-Alias g git
 
 # Utilities
 function which {
