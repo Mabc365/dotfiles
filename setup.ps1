@@ -86,6 +86,11 @@ Install-Module oh-my-posh -Scope CurrentUser -Force
 winget install JanDeDobbeleer.OhMyPosh
 pwsh
 
+# starship
+Write-Output "Installing starship and related modules..."
+winget install Starship.Starship
+pwsh
+
 # Terminal-Icons
 Write-Output "Installing Terminal-Icons module..."
 Install-Module -Name Terminal-Icons -Repository PSGallery -Force
