@@ -59,7 +59,7 @@ function posh {
 
     # Deactivate Starship if it was previously active
     if ($global:CurrentPrompt -eq 'star') {
-        starship init pwsh | Out-Null
+        starship init powershell | Out-Null
     }
 
     # Activate Oh My Posh
