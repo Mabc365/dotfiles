@@ -1,3 +1,6 @@
+Write-Output Installing Powershell 7
+winget install Microsoft.Powershell
+
 # Confirmation Prompt
 $confirmation = Read-Host "Are you sure you want to run this script? This will erase your current configuration and replace it. Type 'yes' to continue or 'no' to exit."
 
