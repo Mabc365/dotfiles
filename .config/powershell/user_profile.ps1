@@ -59,7 +59,7 @@ function posh {
 
     # Deactivate Starship if it was previously active
     if ($global:CurrentPrompt -eq 'star') {
-        starship init powershell | Out-Null
+        Invoke-Expression (& 'C:\Program Files\starship\bin\starship.exe' init powershell --print-full-init | Out-String)
     }
 
     # Activate Oh My Posh
@@ -80,7 +80,7 @@ function star {
     }
 
     # Activate Starship
-    starship init pwsh | Invoke-Expression
+    Invoke-Expression (& 'C:\Program Files\starship\bin\starship.exe' init powershell --print-full-init | Out-String)
     $global:CurrentPrompt = 'star'
 }
 
