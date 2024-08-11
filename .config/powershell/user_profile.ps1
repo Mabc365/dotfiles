@@ -15,15 +15,7 @@ Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineOption -BellStyle None
 Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
 Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineKeyHandler -Key Ctrl+m `
-            -BriefDescription GitMergeForCloneAndMainBranchOfPowershellProfile
-            -LongDescription "Merges Clone and Main branch of my powershell profile to ensure that update script/function works properly"
-            -ScriptBlock {
-  [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
-  [Microsoft.PowerShell.PSConsoleReadLine]::Insert("git checkout clone -- ./.config/")
-  [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
-}
-
+Set-PSReadLineKeyHandler -Chord 'Ctrl+m' Function [Microsoft.Powershell.PSConsoleReadline]::Insert("git checkout clone -- ./.config/")
 
 # Fzf configuration
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
