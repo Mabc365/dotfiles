@@ -32,13 +32,13 @@ Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 Set-Alias home cd
 Set-Alias cr clear
 Set-Alias sudo gsudo
-Set-Alias update '~\.config\powershell\update.ps1'
+Set-Alias update '~/.config/powershell/update.ps1'
 Set-Alias r pwsh
 Set-Alias e explorer
 Set-Alias c cursor
 Set-Alias g git
 Set-Alias m 'git checkout clone -- ./.config/'
-Set-Alias '~\.config\powershell\winutil.ps1'
+Set-Alias winutil '~/.config/powershell/winutil.ps1'
 
 # Utilities
 function which {
