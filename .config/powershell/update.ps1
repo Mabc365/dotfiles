@@ -1,6 +1,6 @@
 #Package Updates
-winget upgrade --all
-scoop update
+#winget upgrade --all
+#scoop update
 
 #Prompt Updates
 $canConnectToGitHub = Test-Connection github.com -Count 2 -Quiet -TimeoutSeconds 5
