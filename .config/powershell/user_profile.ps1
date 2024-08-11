@@ -37,8 +37,7 @@ Set-Alias r pwsh
 Set-Alias e explorer
 Set-Alias c cursor
 Set-Alias g git
-Set-Alias m 'git checkout clone -- ./.config/'
-Set-Alias winutil '~/.config/powershell/winutil.ps1'
+Set-Alias -Name m -Value 'git checkout main -- ./.config/'
 
 # Utilities
 function which {
