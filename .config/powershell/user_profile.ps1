@@ -15,7 +15,6 @@ Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineOption -BellStyle None
 Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
 Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineKeyHandler -Chord 'Ctrl+m' Function [Microsoft.Powershell.PSConsoleReadline]::Insert("git checkout clone -- ./.config/")
 
 # Fzf configuration
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
