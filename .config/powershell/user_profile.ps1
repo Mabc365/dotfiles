@@ -15,15 +15,7 @@ Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineOption -BellStyle None
 Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
 Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineKeyHandler -Key Ctrl+m `
-            -BriefDescription GitMergeForCloneAndMainBranchOfPowershellProfile
-            -LongDescription "Merges Clone and Main branch of my powershell profile to ensure that update script/function works properly"
-            -ScriptBlock {
-  [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
-  [Microsoft.PowerShell.PSConsoleReadLine]::Insert("git checkout clone -- ./.config/")
-  [Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()
-}
-
+Set-PSReadLineKeyHandler -Chord 'Ctrl+m' Function [Microsoft.Powershell.PSConsoleReadline]::Insert("git checkout clone -- ./.config/")
 
 # Fzf configuration
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
@@ -41,13 +33,13 @@ Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 Set-Alias home cd
 Set-Alias cr clear
 Set-Alias sudo gsudo
-Set-Alias update './update.ps1'
+Set-Alias update '$env:USERPROFILE\.config\powershell\update.ps1'
 Set-Alias r pwsh
 Set-Alias e explorer
 Set-Alias c cursor
 Set-Alias g git
 Set-Alias m 'git checkout clone -- ./.config/'
-Set-Alias './winutil.ps1'
+Set-Alias '$env:USERPROFILE\.config\powershell\winutil.ps1'
 
 # Utilities
 function which {
