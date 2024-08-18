@@ -38,6 +38,7 @@ Set-Alias e explorer
 Set-Alias c cursor
 Set-Alias g git
 Set-Alias -Name m -Value 'git checkout main -- ./.config/'
+Set-Alias zc 'z ~/.config'
 
 # Utilities
 function which {
