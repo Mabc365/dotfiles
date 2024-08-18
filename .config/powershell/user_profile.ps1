@@ -22,7 +22,7 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory
 # Environment variables
 $env:GIT_SSH = "C:\Windows\system32\OpenSSH\ssh.exe"
 
-# Aliases
+# Aliases and Functions
 Set-Alias -Name vim -Value nvim
 Set-Alias ll ls
 Set-Alias g git
@@ -37,9 +37,14 @@ Set-Alias r pwsh
 Set-Alias e explorer
 Set-Alias c cursor
 Set-Alias g git
-Set-Alias -Name m -Value 'git checkout main -- ./.config/'
 function zc { Set-Location "$HOME\.config" }
 function zp { Set-Location "$HOME\.config\powershell" }
+function mm {
+    git checkout main -- ./.config/
+}
+function mc {
+    git checkout clone -- ./.config/
+}
 
 # Utilities
 function which {
