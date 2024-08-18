@@ -38,7 +38,8 @@ Set-Alias e explorer
 Set-Alias c cursor
 Set-Alias g git
 Set-Alias -Name m -Value 'git checkout main -- ./.config/'
-Set-Alias zc 'z ~/.config'
+function zc { Set-Location "$HOME\.config" }
+function zp { Set-Location "$HOME\.config\powershell" }
 
 # Utilities
 function which {
