@@ -40,8 +40,8 @@ Set-Alias c cursor
 Set-Alias g git
 function zc { Set-Location "$HOME\.config" }
 function zp { Set-Location "$HOME\.config\powershell" }
-function zd { Set-Location "$HOME\github\dotfiles "}
-function zdc {Set-Location "$HOME\github\dotfiles\.config "}
+function zd { Set-Location "$HOME\github\dotfiles" }
+function zdc { Set-Location "$HOME\github\dotfiles\.config "}
 function zz { z .. }
 function mm {
     git checkout main -- ./.config/
@@ -49,6 +49,9 @@ function mm {
 function mc {
     git checkout clone -- ./.config/
 }
+Set-Alias w winget
+function wi { winget install }
+function ws {winget search }
 
 # Utilities
 function which {
