@@ -43,7 +43,7 @@ function zc { Set-Location "$HOME\.config" }
 function zp { Set-Location "$HOME\.config\powershell" }
 function zd { Set-Location "$HOME\github\dotfiles" }
 function zdc { Set-Location "$HOME\github\dotfiles\.config" }
-function zdcp { Set-Location "$HOME\github\dotfiles\.config" }
+function zdcp { Set-Location "$HOME\github\dotfiles\.config\powershell" }
 function zz { z .. }
 function mm {
     git checkout main -- ./.config/
