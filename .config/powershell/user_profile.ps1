@@ -39,6 +39,8 @@ Set-Alias e explorer
 Set-Alias c cursor
 Set-Alias g git
 Set-Alias w winget
+function zg { Set-Location "$HOME\github" }
+function dev { Set-Location "$HOME\development" }
 function zc { Set-Location "$HOME\.config" }
 function zp { Set-Location "$HOME\.config\powershell" }
 function zd { Set-Location "$HOME\github\dotfiles" }
